@@ -21,5 +21,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t unknown64/express-app-sample:${{ github.sha }} .
-          docker push unknown64/express-app-sample:${{ github.sha }}
+          docker build -t 7shinomiya/express-app-sample:${{ github.sha }} .
+          docker push 7shinomiya/express-app-sample:${{ github.sha }}
