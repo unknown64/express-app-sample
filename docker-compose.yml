@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: express_db
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - webnet
+
+  app:
+    image: your-dockerhub-username/express-app-sample:${COMMIT_SHA}
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql
+      DB_USER_FILE: /run/secrets/db_user
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      DB_NAME: express_db
+    secrets:
+      - db_password
+      - db_user
+    depends_on:
+      - mysql
+    networks:
+      - webnet
+
+secrets:
+  db_password:
+    external: true
+  db_user:
+    external: true
+
+networks:
+  webnet:
+    driver: overlay
+volumes:
+  mysql_data:
