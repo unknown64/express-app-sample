@@ -6,26 +6,21 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: express_db
       MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD_FILE: /run/secrets/db_password
-    secrets:
-      - db_password
+      MYSQL_PASSWORD_FILE: root
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
       - webnet
 
   app:
-    image: your-dockerhub-username/express-app-sample:${COMMIT_SHA}
+    image: 7shinomiya/express-app-sample:c4baa661ef3239e0530351900980674d5e3497>
     ports:
       - "3000:3000"
     environment:
       DB_HOST: mysql
-      DB_USER_FILE: /run/secrets/db_user
-      DB_PASSWORD_FILE: /run/secrets/db_password
+      DB_USER_FILE: root
+      DB_PASSWORD_FILE: root
       DB_NAME: express_db
-    secrets:
-      - db_password
-      - db_user
     depends_on:
       - mysql
     networks:
