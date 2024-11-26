@@ -7,9 +7,9 @@ const app = express();
 // Function to check database connection
 async function checkDbConnection() {
     const dbHost = process.env.DB_HOST || 'localhost';
-    const dbUser = process.env.DB_USER || 'root';
-    const dbPassword = process.env.DB_PASSWORD || '';
-    const dbName = process.env.DB_NAME || 'test';
+    const dbUser = process.env.DB_USER || 'rrkrnqo4ht1o4ne3z1yjmewaz';
+    const dbPassword = process.env.DB_PASSWORD || 'z8rx8xhfbt0j4txbw1g9mxln7';
+    const dbName = process.env.DB_NAME || 'express_db';
 
     try {
         const connection = await mysql.createConnection({
